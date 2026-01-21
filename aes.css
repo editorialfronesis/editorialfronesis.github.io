@@ -145,6 +145,7 @@ section h4 {
 p {
     max-width: 680px;
     margin-bottom: 1rem;
+    text-align: justify
 }
 
 /* =========================

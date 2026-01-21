@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Frónesis — Revista y Editorial Independiente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Meta descriptiva básica -->
+    <meta name="description" content="Frónesis es una iniciativa editorial independiente sin fines de lucro. Está dedicada a la filosofía, la política y el pensamiento crítico.">
+
+    <link rel="stylesheet" href="aes.css">
+</head>
+
+<!-- CONTENEDOR GENERAL -->
+    <div id="layout">
+
+        <!-- BARRA LATERAL DE NAVEGACIÓN -->
+        <aside id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">Frónesis</h1>
+                <p class="tagline">Revista · Editorial · Fundación</p>
+            </div>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="buscador.html">¿Necesitas encontrar un libro?</a></li>
+                    <li><a href="revista.html">Revista Ágora</a></li>
+                    <li><a href="publicaciones.html">Publicaciones</a></li>
+                    <li><a href="#Acerca de">Acerca de</a></li>
+                </ul>
+            </nav>
+
+            <!-- Espacio para futuras extensiones -->
+            <!-- Redes, newsletter, manifiesto breve, etc. -->
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main id="content">
+            <div>
+
+            <h2>Buscador editorial</h2>
+            <br>
+            <p>
+                Busca libros en repositorios abiertos y bibliotecas digitales confiables.
+                No alojamos contenido, solo facilitamos el acceso. <br>
+                Puedes buscar títulos en español, inglés o francés. Este se procesa mediante 
+                una búsqueda especializada en Google. Tendrás un PDF accesible en segundos.
+            </p>
+
+            <input
+                type="text"
+                id="consulta"
+                placeholder="Título o fragmento del título"
+            >
+
+            <button onclick="buscar()">Buscar</button>
+
+            <script>
+                function buscar() {
+                const texto = document.getElementById("consulta").value.trim();
+
+                if (texto === "") {
+                    alert("Escribe algo para buscar.");
+                    return;
+                }
+
+                // Sitios curados
+                const sitios = [
+                    "openlibrary.org",
+                    "gutenberg.org",
+                    "gallica.bnf.fr",
+                    "bibliotecadigital.bcn.cl",
+                    "bdh.bne.es",
+                    "archive.org"
+                ];
+
+                // Construcción del operador site:
+                const filtroSitios = sitios
+                    .map(sitio => "site:" + sitio)
+                    .join(" OR ");
+
+                // Búsqueda final
+                const consultaFinal = `intitle:"${texto}" (${filtroSitios})`;
+
+                // Codificar para URL
+                const url = "https://www.google.com/search?q=" + encodeURIComponent(consultaFinal);
+
+                // Redirigir
+                window.location.href = url;
+                }
+
+                // Permitir buscar con Enter
+                document.getElementById("consulta").addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    buscar();
+                }
+                });
+            </script>
+            <br>
+            <p>
+                Si buscas un libro posterior a 1950 es posible que su acceso esté limitado por
+                derechos de autor. Te invitamos a buscar un vendedor autorizado. <br>
+                O puedes visitar la parte trasera bajo tu propio riesgo.
+                
+                <a href="backroom.html">Inicio</a>
+            </p>            
+            </div>
+        </main>
+</html>
